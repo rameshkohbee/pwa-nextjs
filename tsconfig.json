@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,62 +16,23 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@components": [
-        "src/components"
-      ],
-      "@page/*": [
-        "src/page/*"
-      ],
-      "@page": [
-        "src/page"
-      ],
-      "@public/*": [
-        "public/*"
-      ],
-      "@public": [
-        "public"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@styles": [
-        "src/styles"
-      ],
-      "@components/icons/*": [
-        "src/components/icons/*"
-      ],
-      "@components/icons": [
-        "src/components/icons"
-      ],
-      "@services/*": [
-        "src/services/*"
-      ],
-      "@services": [
-        "src/services"
-      ],
-      "@recoil/*": [
-        "src/recoil/*"
-      ],
-      "@recoil": [
-        "src/recoil"
-      ],
-      "@library/icons": [
-        "src/library/icons"
-      ]
+      "@components/*": ["src/components/*"],
+      "@components": ["src/components"],
+      "@page/*": ["src/page/*"],
+      "@page": ["src/page"],
+      "@public/*": ["public/*"],
+      "@public": ["public"],
+      "@styles/*": ["src/styles/*"],
+      "@styles": ["src/styles"],
+      "@components/icons/*": ["src/components/icons/*"],
+      "@components/icons": ["src/components/icons"],
+
+      "@recoil/*": ["src/recoil/*"],
+      "@recoil": ["src/recoil"],
+      "@library/icons": ["src/library/icons"]
     },
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "static/editor/editor.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "__generated__/globalTypes.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "__generated__/globalTypes.ts"]
 }
