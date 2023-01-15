@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+html {
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-style: normal;
+}
+
+@media (min-width: 800px)  {
+    html{
+        font-size: 20px;
+    }
+}
+
+.bigtext {
+    /* UpdatedMobile/BigText */
+    font-weight: 500;
+    font-size: 3.052rem;
+    line-height: 72px;
+    /* or 147% */
+}
+
+
+.header {
+    font-weight: 700;
+    font-size: 1.618rem;
+    line-height: 36px;
+    /* or 139% */
+}
+
+
+.headerSmall {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 28px;
+    /* or 140% */
+}
+
+.paragraphBig {
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 28px;
+    /* or 140% */
+}
+
+.paragraphRegular {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    /* or 150% */
+}
+
+.subtextRegular {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 24px;
+    /* or 150% */
+}
+
+.paragraphSmall {
+    font-weight: 400;
+    font-size: 0.8rem;
+    line-height: 24px;
+    /* or 187% */
+}
+
+.subtextSmall {
+    font-weight: 600;
+    font-size: 0.8rem;
+    line-height: 20px;
+    /* or 187% */
+    letter-spacing: 0.04em;
+}
+
+.smalltext {
+    font-weight: 500;
+    font-size: 0.64rem;
+    line-height: 16px;
+    /* or 156% */
+    letter-spacing: 0.08em;
+}
+
+@media (min-width: 800px) {
+    .bigtext {
+        line-height: 88px;
+    }
+    .header {
+        line-height: 48px;
+    }
+    .headerSmall {
+        line-height: 40px;
+    }
+    .paragraphBig {
+        line-height: 40px;
+    }
+    .paragraphRegular {
+        line-height: 32px;
+    }
+    .subtextRegular {
+        line-height: 32px;
+    }
+    .paragraphSmall {
+        line-height: 28px;
+    }
+    .subtextSmall {
+        line-height: 24px;
+    }
+    .smalltext {
+        line-height: 20px;
+    }
+}
