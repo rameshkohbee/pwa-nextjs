@@ -8,7 +8,4 @@ module.exports = withPWA({
   images: {
     domains: ["web-dev.imgix.net", "unsplash.com"],
   },
-  experimental: {
-    appDir: true,
-  },
 });
