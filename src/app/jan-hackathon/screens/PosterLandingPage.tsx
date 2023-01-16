@@ -5,6 +5,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 const wordLimit = 900;
 const PosterLandingPage = ({
@@ -18,6 +19,7 @@ const PosterLandingPage = ({
   const [usePosterData, setPosterData] = useRecoilState(
     KohbeeMarketingPosterState
   );
+  const router = useRouter();
   const textAreaRef = useRef<any>();
   const [wordCount, setWordCount] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,8 @@ const PosterLandingPage = ({
     type: "hookline" | "description";
     query: string;
   }) => {
-    console.log(type);
+    // console.log(type);
+
     const apiUrl = "https://api.openai.com/v1/completions";
     let isSuccess = false;
     const options = {
@@ -114,31 +117,34 @@ const PosterLandingPage = ({
 
   const handleGetHooklines = async () => {
     setLoading(true);
+
     let value = userInput;
     let newValue = value.replace(/[\t\n\r]/gm, " ");
 
     const hooklineQuery = `Create a hook line in less than 8 words from the following text. ${newValue}`;
     // const query = `Create a value-driven title in not more than 8 words using the following text. ${newValue}`;
-    
+
     const descriptionQuery = `Create a value-deriving title in less than 18 words from the following text. ${newValue}`;
 
     let hooklines = await getHooklines({
       type: "hookline",
       query: hooklineQuery,
     });
-    console.log("hookline", hooklines);
+
     if (hooklines) {
       let description = await getHooklines({
         type: "description",
         query: descriptionQuery,
       });
-      console.log("description", description);
-
+      
       if (description) {
-        handleSetStage(2);
+        // handleSetStage(2);
+        router.push("?step=title", undefined, { shallow: true });
         return true;
       }
     }
+    // handleSetStage(2);
+
     setLoading(false);
   };
   return (
