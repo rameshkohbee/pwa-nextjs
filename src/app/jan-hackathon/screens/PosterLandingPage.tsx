@@ -31,11 +31,11 @@ const PosterLandingPage = ({
     setUserInput(userInput);
   };
 
+
   const handleGetHooklines = () => {
     setLoading(true);
     const apiUrl = "https://api.openai.com/v1/completions";
-    const apiKey = "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"; //ramesh
-    // const apiKey = "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";
+  // const apiKey = "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";
     // const apiKey = "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";
     // const query = `Generate a alternate value-deriving titles in not more than 8 words from the following text. ${userInput}`;
     const query = `Create a hook line in less than 8 words from the following text. ${userInput}`;
@@ -44,7 +44,7 @@ const PosterLandingPage = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAIKEY}`,
       },
       body: JSON.stringify({
         prompt: query,
