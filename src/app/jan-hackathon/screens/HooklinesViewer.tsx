@@ -1,9 +1,9 @@
 import { Text } from "@components/text";
 import { KohbeeMarketingPosterState } from "@recoil/atoms";
 import { useRecoilState } from "recoil";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AngleIcon } from "@library/icons";
+import { useRouter } from "next/router";
 
 const HooklineViewer = ({
   handleSetStage,
@@ -13,7 +13,7 @@ const HooklineViewer = ({
   const [usePosterData, setPosterData] = useRecoilState(
     KohbeeMarketingPosterState
   );
-  const apiKey = process.env.NEXT_PUBLIC_OPENAIKEY;
+  const router = useRouter();
   const handleSelectHookline = (index: number) => {
     const hookline = usePosterData?.hooklines[index];
 
@@ -21,7 +21,8 @@ const HooklineViewer = ({
       ...usePosterData,
       selectedHookline: hookline,
     });
-    handleSetStage(3);
+    // handleSetStage(3);
+    router.push("?step=description", undefined, { shallow: true });
   };
 
   return (
@@ -66,12 +67,6 @@ const HooklineViewer = ({
           </div>
         </div>
       )}
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        theme="dark"
-        limit={2}
-      />
     </div>
   );
 };
