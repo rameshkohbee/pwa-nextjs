@@ -44,7 +44,7 @@ const PosterLandingPage = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAIKEY}`,
+        Authorization: `Bearer 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`,
       },
       body: JSON.stringify({
         prompt: query,
