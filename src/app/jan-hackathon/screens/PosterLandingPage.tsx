@@ -19,7 +19,7 @@ const PosterLandingPage = ({
   const textAreaRef = useRef<any>();
   const [wordCount, setWordCount] = useState<number>(0);
   const [loading, setLoading] = useState(false);
-
+  const apiKey = process.env.NEXT_PUBLIC_OPENAIKEY;
   const handleChangeAns = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     let userInput = value;
@@ -30,21 +30,19 @@ const PosterLandingPage = ({
 
     setUserInput(userInput);
   };
-
+  console.log("api", apiKey);
 
   const handleGetHooklines = () => {
     setLoading(true);
     const apiUrl = "https://api.openai.com/v1/completions";
-  // const apiKey = "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";
-    // const apiKey = "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";
-    // const query = `Generate a alternate value-deriving titles in not more than 8 words from the following text. ${userInput}`;
+
     const query = `Create a hook line in less than 8 words from the following text. ${userInput}`;
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         prompt: query,
@@ -84,7 +82,6 @@ const PosterLandingPage = ({
           },
         };
         setPosterData({ ...payload });
-        console.log(data);
         handleSetStage(2);
       })
       .catch((error) => {

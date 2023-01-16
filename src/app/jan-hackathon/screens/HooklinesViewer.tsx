@@ -13,19 +13,18 @@ const HooklineViewer = ({
   const [usePosterData, setPosterData] = useRecoilState(
     KohbeeMarketingPosterState
   );
+  const apiKey = process.env.NEXT_PUBLIC_OPENAIKEY;
   const handleSelectHookline = (index: number) => {
     const hookline = usePosterData?.hooklines[index];
     const apiUrl = "https://api.openai.com/v1/completions";
-    // const apiKey = "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";
-    // const apiKey = "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";
-    // const query = `Generate a alternate value-deriving titles in not more than 8 words from the following text. ${userInput}`;
+
     const query = `Create a value-deriving title in less than 18 words from the following text. ${usePosterData?.userInput}`;
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         prompt: query,
@@ -49,7 +48,6 @@ const HooklineViewer = ({
           description: hooks.length ? hooks : [],
           selectedHookline: hookline,
         });
-        console.log(data);
         handleSetStage(3);
       })
       .catch((error) => {
