@@ -2,6 +2,7 @@ import { Text } from "@components/text";
 import { KohbeeMarketingPosterState } from "@recoil/atoms";
 import { useRecoilState } from "recoil";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AngleIcon } from "@library/icons";
 
 const HooklineViewer = ({

@@ -3,6 +3,7 @@ import { Text } from "@components/text";
 import { KohbeeMarketingPosterState } from "@recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useCallback, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 
