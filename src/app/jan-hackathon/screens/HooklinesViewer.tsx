@@ -16,44 +16,12 @@ const HooklineViewer = ({
   const apiKey = process.env.NEXT_PUBLIC_OPENAIKEY;
   const handleSelectHookline = (index: number) => {
     const hookline = usePosterData?.hooklines[index];
-    const apiUrl = "https://api.openai.com/v1/completions";
 
-    const query = `Create a value-deriving title in less than 18 words from the following text. ${usePosterData?.userInput}`;
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        prompt: query,
-        model: "text-davinci-003",
-        temperature: 0.7,
-        max_tokens: 150,
-        stop: ".",
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        n: 4,
-      }),
-    };
-    // n: 4,
-    fetch(apiUrl, options)
-      .then((response) => response.json())
-      .then((data) => {
-        const hooks = data.choices.map((choice) => choice.text);
-        setPosterData({
-          ...usePosterData,
-          description: hooks.length ? hooks : [],
-          selectedHookline: hookline,
-        });
-        handleSetStage(3);
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Something went wrong");
-      });
+    setPosterData({
+      ...usePosterData,
+      selectedHookline: hookline,
+    });
+    handleSetStage(3);
   };
 
   return (

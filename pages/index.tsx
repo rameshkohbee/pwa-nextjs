@@ -20,20 +20,23 @@ export default function Home(): JSX.Element {
   useEffect(() => {
     const payload = {
       userInput: "",
-      hooklines: [
-        "Improve flexibility, strength, technique through yoga.",
-        "Improve flexibility, strength, technique through yoga.",
-        "Improve flexibility, strength, technique through yoga.",
-        "Improve flexibility, strength, technique through yoga.",
-      ],
-      description: [
-        "Unlock your full potential with our 10 hours YACEP course under the guidance of International Yoga Master Praveen Kumar Verma",
-        "Unlock your full potential with our 10 hours YACEP course under the guidance of International Yoga Master Praveen Kumar Verma",
-        "Unlock your full potential with our 10 hours YACEP course under the guidance of International Yoga Master Praveen Kumar Verma",
-        "Unlock your full potential with our 10 hours YACEP course under the guidance of International Yoga Master Praveen Kumar Verma",
-      ],
-      selectedHookline: usePosterData?.selectedHookline || "",
-      selectedDescription: usePosterData?.selectedDescription || "",
+      hooklines: [],
+      description: [],
+      selectedHookline: "",
+      selectedDescription: "",
+      selectedPosterStyle: {
+        id: 1,
+        bg: "bg-[url('/images/marketingPoster/1_Vibes.png')]",
+        boxStyle:
+          "p-6 pt-8 cursor-pointer bg-[url('/images/marketingPoster/1_Vibes.png')] bg-cover max-w-[300px] aspect-square ",
+        hookline: {
+          style: "text-left !text-[#333333] headerSmall uppercase mb-3",
+        },
+        description: {
+          isVisible: true,
+          style: "text-left !text-[#333333] smalltext uppercase",
+        },
+      },
     };
     setPosterData({ ...usePosterData, ...payload });
   }, []);

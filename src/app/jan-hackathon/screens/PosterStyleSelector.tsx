@@ -56,7 +56,7 @@ const PosterStyleSelector = ({
             boxStyle:
                 "p-4 pt-[62px] cursor-pointer bg-[url('/images/marketingPoster/4_Shoutout.png')] bg-cover max-w-[300px] min-w-[300px] aspect-square ",
             hookline: {
-                style: "text-center !text-[#333333] text-[20px] font-[700] leading-[36px]",
+                style: "text-center !text-[#333333] text-[20px] font-[700] leading-[28px]",
             },
             description: {
                 isVisible: false,

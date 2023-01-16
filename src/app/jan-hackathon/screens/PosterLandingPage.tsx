@@ -12,7 +12,9 @@ const PosterLandingPage = ({
 }: {
   handleSetStage: (value: number) => void;
 }): JSX.Element => {
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState(
+    "Join our 10-hour online yoga course under the guidance of International Yoga Master Praveen Kumar Verma, focusing on advanced techniques for flexibility and strength, arm balances, and more. Suitable for all fitness levels, with multiple styles of yoga included"
+  );
   const [usePosterData, setPosterData] = useRecoilState(
     KohbeeMarketingPosterState
   );
@@ -31,12 +33,16 @@ const PosterLandingPage = ({
     setUserInput(userInput);
   };
 
-  const handleGetHooklines = () => {
-    setLoading(true);
+  const getHooklines = async ({
+    type,
+    query,
+  }: {
+    type: "hookline" | "description";
+    query: string;
+  }) => {
+    console.log(type);
     const apiUrl = "https://api.openai.com/v1/completions";
-
-    const query = `Create a hook line in less than 8 words from the following text. ${userInput}`;
-
+    let isSuccess = false;
     const options = {
       method: "POST",
       headers: {
@@ -55,41 +61,85 @@ const PosterLandingPage = ({
         n: 4,
       }),
     };
-    // n: 4,
-    fetch(apiUrl, options)
+    let data = fetch(apiUrl, options)
       .then((response) => response.json())
       .then((data) => {
-        const hooks = data.choices.map((choice) => choice.text);
-        const payload = {
-          userInput: userInput,
-          hooklines: hooks.length ? hooks : [],
-          description: usePosterData?.description || [],
-          selectedHookline: "",
-          selectedDescription: "",
-          selectedPosterStyle: {
-            id: 1,
-            bg: "bg-[url('/images/marketingPoster/1_Vibes.png')]",
-            boxStyle:
-              "p-6 pt-8 cursor-pointer bg-[url('/images/marketingPoster/1_Vibes.png')] bg-cover max-w-[300px] aspect-square ",
-            hookline: {
-              style: "text-left !text-[#333333] headerSmall uppercase mb-3",
-            },
-            description: {
-              isVisible: true,
-              style: "text-left !text-[#333333] smalltext uppercase",
-            },
-          },
-        };
-        setPosterData({ ...payload });
-        handleSetStage(2);
+        let isEmptyField = false;
+        const hooks = data.choices.map((choice) => {
+          if (!choice?.text?.length) {
+            isEmptyField = true;
+          }
+          return choice.text;
+        });
+        if (hooks?.length && !isEmptyField) {
+          isSuccess = true;
+          if (type == "hookline") {
+            const payload = {
+              userInput: userInput,
+              hooklines: hooks?.length ? hooks : [],
+            };
+            setPosterData((prev) => {
+              return { ...prev, ...payload };
+            });
+          } else {
+            const payload = {
+              userInput: userInput,
+              description: hooks?.length ? hooks : [],
+            };
+            setPosterData((prev) => {
+              return { ...prev, ...payload };
+            });
+          }
+          return true;
+        } else {
+          if (hooks?.length && isEmptyField) {
+            toast.warn("You have exceeded max token limit");
+          } else {
+            toast.warn("Something went wrong");
+          }
+          isSuccess = false;
+          return false;
+        }
       })
       .catch((error) => {
         console.log(error);
         toast.error("Something went wrong");
-      })
-      .finally(() => {
         setLoading(false);
+        isSuccess = false;
+        return false;
       });
+    await data;
+    return isSuccess;
+  };
+
+  const handleGetHooklines = async () => {
+    setLoading(true);
+    let value = userInput;
+    let newValue = value.replace(/[\t\n\r]/gm, " ");
+
+    const hooklineQuery = `Create a hook line in less than 8 words from the following text. ${newValue}`;
+    // const query = `Create a value-driven title in not more than 8 words using the following text. ${newValue}`;
+    
+    const descriptionQuery = `Create a value-deriving title in less than 18 words from the following text. ${newValue}`;
+
+    let hooklines = await getHooklines({
+      type: "hookline",
+      query: hooklineQuery,
+    });
+    console.log("hookline", hooklines);
+    if (hooklines) {
+      let description = await getHooklines({
+        type: "description",
+        query: descriptionQuery,
+      });
+      console.log("description", description);
+
+      if (description) {
+        handleSetStage(2);
+        return true;
+      }
+    }
+    setLoading(false);
   };
   return (
     <div className="page-margin">
