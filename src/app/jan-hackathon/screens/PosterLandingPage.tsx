@@ -30,7 +30,6 @@ const PosterLandingPage = ({
 
     setUserInput(userInput);
   };
-  console.log("api", apiKey);
 
   const handleGetHooklines = () => {
     setLoading(true);
