@@ -88,7 +88,7 @@ const PosterStyleSelector = ({
   };
 
   return (
-    <div className="page-margin pb-4">
+    <div className="page-margin pb-6 md:pb-8">
       <Text
         t="Choose a Style"
         style="header text-center mt-[112px] md:mt-[142px]"

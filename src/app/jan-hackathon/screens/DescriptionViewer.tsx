@@ -25,7 +25,7 @@ const DescriptionViewer = ({
   console.log("posterData", usePosterData);
 
   return (
-    <div className="page-margin pb-4">
+    <div className="page-margin pb-6 md:pb-8">
       <Text
         t="Add a short description to show some value "
         style="header text-center mt-[112px] md:mt-[142px]"

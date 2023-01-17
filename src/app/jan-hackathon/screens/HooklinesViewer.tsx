@@ -27,7 +27,7 @@ const HooklineViewer = ({
   console.log("posterDataHookline", usePosterData);
 
   return (
-    <div className="page-margin">
+    <div className="page-margin pb-6 md:pb-8">
       <Text
         t="Hook your viewers with a Crisp Title"
         style="header text-center mt-[112px] md:mt-[142px]"
