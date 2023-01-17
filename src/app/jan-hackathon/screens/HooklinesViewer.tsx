@@ -24,6 +24,7 @@ const HooklineViewer = ({
     // handleSetStage(3);
     router.push("?step=description", undefined, { shallow: true });
   };
+  console.log("posterDataHookline", usePosterData);
 
   return (
     <div className="page-margin">
@@ -45,10 +46,7 @@ const HooklineViewer = ({
                 onClick={() => handleSelectHookline(index)}
               >
                 <Text
-                  t={
-                    hookline ||
-                    "Improve flexibility, strength, technique through yoga."
-                  }
+                  t={hookline ? hookline : ""}
                   style="subtextRegular text-dark-grey w-[80%]"
                 />
                 <div>

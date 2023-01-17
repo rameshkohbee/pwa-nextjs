@@ -57,23 +57,32 @@ const PosterLandingPage = ({
         model: "text-davinci-003",
         temperature: 0.7,
         max_tokens: 150,
-        stop: ".",
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        n: 4,
       }),
     };
+    // stop: ".",
+    // top_p: 1,
+    // frequency_penalty: 0,
+    // presence_penalty: 0,
+    // n: 4,
     let data = fetch(apiUrl, options)
       .then((response) => response.json())
       .then((data) => {
         let isEmptyField = false;
-        const hooks = data.choices.map((choice) => {
-          if (!choice?.text?.length) {
-            isEmptyField = true;
+        let hooks = data.choices.filter((choice) => {
+          if (choice?.text?.trim().length) {
+            return choice;
           }
-          return choice.text;
         });
+        // console.log(isEmptyField, "sentance", hooks);
+        hooks = hooks.map((choice) => choice.text);
+        // if (hooks?.length < 2) {
+        //   isEmptyField = true;
+        // }
+        // console.log(isEmptyField, "after", hooks);
+        if (!hooks?.length) {
+          hooks = ["", ""];
+          isEmptyField = true;
+        }
         if (hooks?.length && !isEmptyField) {
           isSuccess = true;
           if (type == "hookline") {
@@ -136,7 +145,7 @@ const PosterLandingPage = ({
         type: "description",
         query: descriptionQuery,
       });
-      
+
       if (description) {
         // handleSetStage(2);
         router.push("?step=title", undefined, { shallow: true });
@@ -148,7 +157,7 @@ const PosterLandingPage = ({
     setLoading(false);
   };
   return (
-    <div className="page-margin">
+    <div className="page-margin pb-6 md:pb-8">
       <Text
         t="Welcome to Marketing Poster Creator"
         style="header text-center mt-[92px]"
@@ -173,8 +182,10 @@ const PosterLandingPage = ({
 
         <div>
           <Text
-            t={`${wordCount}/${wordLimit} Words${
-              wordCount >= wordLimit ? ", You have exceeded max word limit" : ""
+            t={`${wordCount}/${wordLimit} Characters ${
+              wordCount >= wordLimit
+                ? ", You have exceeded max character limit"
+                : ""
             }`}
             style={`smalltext ml-3 ${
               wordCount >= wordLimit ? "!text-[#E03131]" : "!text-#0000008a"

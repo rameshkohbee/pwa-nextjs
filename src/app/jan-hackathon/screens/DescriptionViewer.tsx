@@ -22,6 +22,7 @@ const DescriptionViewer = ({
       router.push("?step=templates", undefined, { shallow: true });
     }
   };
+  console.log("posterData", usePosterData);
 
   return (
     <div className="page-margin pb-4">
@@ -43,10 +44,7 @@ const DescriptionViewer = ({
                 onClick={() => handleSelectDescription(index)}
               >
                 <Text
-                  t={
-                    description ||
-                    "Unlock your full potential with our 10 hours YACEP course under the guidance of International Yoga Master Praveen Kumar Verma"
-                  }
+                  t={description ? description : ""}
                   style="subtextSmall text-dark-grey w-[90%]"
                 />
                 <div>
