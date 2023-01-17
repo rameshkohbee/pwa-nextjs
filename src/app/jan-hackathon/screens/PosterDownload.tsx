@@ -4,7 +4,7 @@ import { KohbeeMarketingPosterState } from "@recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 
 const PosterDownload = (): JSX.Element => {
@@ -34,12 +34,15 @@ const PosterDownload = (): JSX.Element => {
         setLoading(false);
       });
   }, [downloadRef]);
+  useEffect(()=>{
+    window.scroll(0,0)
+  },[])
 
   return (
-    <div className="page-margin pb-4 ">
+    <div className="page-margin pb-4">
       <Text
         t="Ready to Go!"
-        style="header text-center mt-[112px] md:mt-[142px]"
+        style="header text-center mt-16"
       />
       <Text t="Download and Share!" style="paragraphRegular text-center mt-4" />
       <div className="mt-10 flex justify-center">

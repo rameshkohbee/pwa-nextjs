@@ -1,6 +1,7 @@
 import { Text } from "@components/text";
 import { KohbeeMarketingPosterState } from "@recoil/atoms";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 const PosterStyleSelector = ({
@@ -12,6 +13,13 @@ const PosterStyleSelector = ({
     KohbeeMarketingPosterState
   );
   const router = useRouter();
+
+  const templateName = {
+    "1": "Vibes",
+    "2": "Dark",
+    "3": "Pop",
+    "4": "Shoutout",
+  };
 
   const tempateStyle = [
     {
@@ -86,6 +94,9 @@ const PosterStyleSelector = ({
       router.push("?step=generating", undefined, { shallow: true });
     }
   };
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <div className="page-margin pb-6 md:pb-8">
@@ -100,28 +111,33 @@ const PosterStyleSelector = ({
       <div className="mt-10 w-10/12 m-auto">
         <div className="w-full flex justify-center flex-wrap gap-8 ">
           {tempateStyle?.map((poster, index) => (
-            <div
-              key={index}
-              className="drop-shadow-[0px_0px_8px_rgba(0,0,0,0.25)]"
-            >
+            <div key={index}>
+              <div className="mb-2">
+                <Text t={templateName[poster.id]} style="text-center subtextSmall"/>
+              </div>
               <div
-                className={poster.boxStyle}
-                onClick={() => handleSelectTemplate(index)}
+                key={index}
+                className="drop-shadow-[0px_0px_8px_rgba(0,0,0,0.25)]"
               >
-                <div>
-                  <Text
-                    t={usePosterData.selectedHookline}
-                    style={`${poster.hookline?.style}`}
-                  />
-                </div>
-                {poster.description.isVisible && (
+                <div
+                  className={poster.boxStyle}
+                  onClick={() => handleSelectTemplate(index)}
+                >
                   <div>
                     <Text
-                      t={usePosterData.selectedDescription}
-                      style={`${poster.description?.style}`}
+                      t={usePosterData.selectedHookline}
+                      style={`${poster.hookline?.style}`}
                     />
                   </div>
-                )}
+                  {poster.description.isVisible && (
+                    <div>
+                      <Text
+                        t={usePosterData.selectedDescription}
+                        style={`${poster.description?.style}`}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}

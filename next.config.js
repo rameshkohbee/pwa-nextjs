@@ -5,6 +5,7 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   // config
+
   images: {
     domains: ["web-dev.imgix.net", "unsplash.com"],
   },

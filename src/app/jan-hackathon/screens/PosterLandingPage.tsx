@@ -21,7 +21,7 @@ const PosterLandingPage = ({
   );
   const router = useRouter();
   const textAreaRef = useRef<any>();
-  const [wordCount, setWordCount] = useState<number>(0);
+  const [wordCount, setWordCount] = useState<number>(userInput.length);
   const [loading, setLoading] = useState(false);
   const apiKey = process.env.NEXT_PUBLIC_OPENAIKEY;
   const handleChangeAns = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -74,16 +74,17 @@ const PosterLandingPage = ({
           }
         });
         // console.log(isEmptyField, "sentance", hooks);
-        hooks = hooks.map((choice) => choice.text);
-        // if (hooks?.length < 2) {
-        //   isEmptyField = true;
-        // }
-        // console.log(isEmptyField, "after", hooks);
+        hooks = hooks.map((choice) =>
+          choice.text
+            .replaceAll(/[\t\n\r]/gm, " ")
+            .replaceAll(/["]/gm, "")
+            .replace(".", "")
+        );
+
         if (!hooks?.length) {
-          hooks = ["", ""];
           isEmptyField = true;
         }
-        if (hooks?.length && !isEmptyField) {
+        if (!isEmptyField) {
           isSuccess = true;
           if (type == "hookline") {
             const payload = {
@@ -104,20 +105,16 @@ const PosterLandingPage = ({
           }
           return true;
         } else {
-          if (hooks?.length && isEmptyField) {
-            toast.warn("You have exceeded max token limit");
-          } else {
-            toast.warn("Something went wrong");
-          }
-          isSuccess = false;
+          toast.warn("OpenAI:You have exceeded max token limit");
+          isSuccess = true;
           return false;
         }
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Something went wrong");
+        toast.error("OpenAI:Something went wrong");
         setLoading(false);
-        isSuccess = false;
+        isSuccess = true;
         return false;
       });
     await data;
@@ -148,11 +145,10 @@ const PosterLandingPage = ({
 
       if (description) {
         // handleSetStage(2);
-        router.push("?step=title", undefined, { shallow: true });
+        router.replace("?step=title", undefined, { shallow: true });
         return true;
       }
     }
-    // handleSetStage(2);
 
     setLoading(false);
   };
@@ -160,7 +156,7 @@ const PosterLandingPage = ({
     <div className="page-margin pb-6 md:pb-8">
       <Text
         t="Welcome to Marketing Poster Creator"
-        style="header text-center mt-[92px]"
+        style="header text-center mt-10"
       />
       <Text
         t="Upload your content and Choose your Poster. As simple as that!"

@@ -27,28 +27,6 @@ export default function Home(): JSX.Element {
     download: 6,
   };
 
-  // const isReloaded = (stage: string) => {
-  //   switch (stage) {
-  //     case "title":
-  //     case "description": {
-  //       if (!usePosterData?.description?.length) {
-  //         return true;
-  //       }
-  //       return false;
-  //     }
-  //     case "templates":
-  //     case "download": {
-  //       if (
-  //         !usePosterData?.selectedHookline ||
-  //         !usePosterData?.description?.length
-  //       ) {
-  //         return true;
-  //       }
-  //       return false;
-  //     }
-  //   }
-  //   return false;
-  // };
   useEffect(() => {
     let query = router?.query?.step;
     if (query) {
@@ -90,12 +68,8 @@ export default function Home(): JSX.Element {
   const handleSetStage = useCallback(
     (value: number) => {
       if (value == -1 && stage > 2) {
-        // setStage((prev) => prev - 1);
         router.back();
       }
-      // else {
-      //   setStage(value);
-      // }
     },
     [stage]
   );
@@ -125,9 +99,7 @@ export default function Home(): JSX.Element {
         </div>
         <div
           className={`mt-4 grid grid-cols-12 gap-2  ${
-            stage == 2 || stage == 3 || stage == 4 || stage == 5
-              ? "visible"
-              : "invisible"
+            stage == 2 || stage == 3 || stage == 4 || stage == 5 ? "" : "hidden"
           }`}
         >
           <div className="col-start-3 col-end-11 mb-1">
