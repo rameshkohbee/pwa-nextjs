@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ctrl/react-adsense": "^1.6.1",
     "@types/recoil": "^0.0.9",
     "dotenv": "^16.0.3",
     "html-to-image": "^1.11.4",

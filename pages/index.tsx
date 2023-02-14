@@ -1,8 +1,10 @@
+import { Button } from "@components/button";
 import { NotFound } from "@components/not-found";
 import { ProgressBar } from "@components/progress-bar";
 import { Text } from "@components/text";
 import { BackArrowIcon } from "@library/icons";
 import { KohbeeMarketingPosterState } from "@recoil/atoms";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -81,9 +83,13 @@ export default function Home(): JSX.Element {
     "4": "All Done! Sit back...",
   };
 
-  console.log(stage);
   return (
     <div className="max-w-7xl mx-auto">
+      <div className="fixed top-1 right-1 z-20">
+        <Link href={"/ads"}>
+          <Button fillColor={false}>Check ads</Button>
+        </Link>
+      </div>
       <div className="margin-x max-w-7xl mx-auto bg-pure-white z-10 py-4 fixed top-0 left-0 right-0">
         <div
           className={`flex justify-start ${

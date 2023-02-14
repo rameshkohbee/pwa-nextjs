@@ -25,6 +25,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link href="/favicon.png" rel="icon" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="image/png"></link>
         <meta name="theme-color" content="#317EFB" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
       </Head>
       <RecoilRoot>
         <Layout>
